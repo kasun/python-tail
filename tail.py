@@ -19,13 +19,14 @@ class Tail:
 
     def add_files(self, *args):
         self.files.extend(list(args))
-        print self.files
 
     def print_tail(self, *args, **kargs):
-        pass
+        if 'f' in args:
+            self.print_follow(list(args).remove('f'))
 
     def print_follow(self):
-        pass
+        if not self.callback:
+            raise TailError('follow option passed without registering a callback function')
 
     def register_callback(self, func):
         self.callback = func
