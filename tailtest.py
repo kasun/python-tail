@@ -26,6 +26,10 @@ class TailTests(unittest.TestCase):
         output = tail_file.print_tail(n=5)[1]
         lines = output.split('\n')
         self.assertEqual(len(lines), 5)
+    def testFollowWithoutCallbackFunction(self):
+        tail_file = tail.Tail('testfiles/testfile.py')
+        self.assertRaises(tail.TailError, tail_file.print_tail, 'f')
+        
 
 if __name__ == '__main__':
     unittest.main()
