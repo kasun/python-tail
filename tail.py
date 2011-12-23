@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
-#
-# Python-Tail - Unix tail implementation in Python <https://github.com/kasun/python-tail>
-# Author - Kasun Herath <kasunh01 at gmail.com>
-#
+'''
+Python-Tail - Unix tail implementation in Python <https://github.com/kasun/python-tail>
+Author - Kasun Herath <kasunh01 at gmail.com>
+'''
 
 import os
 
