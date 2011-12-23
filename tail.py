@@ -11,12 +11,6 @@ class Tail:
     def __init__(self, *args):
         self.files = list(args)
         for file_ in self.files:
-            if not os.access(file_, os.F_OK):
-                raise TailError('file does not exist')
-            if not os.access(file_, os.R_OK):
-                raise TailError('file not readable')
-            if os.path.isdir(file_):
-                raise TailError('file is a directory')
 
     def add_files(self, *args):
         self.files.extend(list(args))
@@ -27,10 +21,18 @@ class Tail:
 
     def print_follow(self):
         if not self.callback:
-            raise TailError('follow option passed without registering a callback function')
+            raise TailError('Follow option passed without registering a callback function')
 
     def register_callback(self, func):
         self.callback = func
+
+    def check_file_validity(self, file_):
+        if not os.access(file_, os.F_OK):
+            raise TailError("File '%s' does not exist" % (file_))
+        if not os.access(file_, os.R_OK):
+            raise TailError("File '%s' not readable" % (file_))
+        if os.path.isdir(file_):
+            raise TailError("File '%s' is a directory" % (file_))
 
 class TailError(Exception):
     def __init__(self, msg):
