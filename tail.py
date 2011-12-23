@@ -8,17 +8,23 @@
 import os
 
 class Tail:
+    ''' Represent a tail command '''
     def __init__(self, *args):
+        ''' Initiate a Tail instance and add files to be tracked if provided '''
         self.files = []
+        tmp_filelist = []
         for file_ in args:
             self.check_file_validity(file_)
-            self.files.append(file_)
+            tmp_filelist.append(file_)
+        self.files.extend(list(set(tmp_filelist)))
 
     def add_files(self, *args):
-        for file_ in args:
-            os.access(file_, os.F_OK)
+        ''' Add files to be tracked '''
+        tmp_filelist = []
+        for file_ in [file_ for file_ in args if file_ not in self.files]:
             self.check_file_validity(file_)
-            self.files.append(file_)
+            tmp_filelist.append(file_)
+        self.files.extend(list(set(tmp_filelist)))
 
     def print_tail(self, *args, **kargs):
         if 'f' in args:
