@@ -9,11 +9,16 @@ import os
 
 class Tail:
     def __init__(self, *args):
-        self.files = list(args)
-        for file_ in self.files:
+        self.files = []
+        for file_ in args:
+            self.check_file_validity(file_)
+            self.files.append(file_)
 
     def add_files(self, *args):
-        self.files.extend(list(args))
+        for file_ in args:
+            os.access(file_, os.F_OK)
+            self.check_file_validity(file_)
+            self.files.append(file_)
 
     def print_tail(self, *args, **kargs):
         if 'f' in args:
