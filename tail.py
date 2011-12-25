@@ -11,6 +11,7 @@ class Tail:
     ''' Represent a tail command '''
     def __init__(self, file_):
         ''' Initiate a Tail instance '''
+        self.check_file_validity(file_)
         self.tail_file = file_
 
     def follow(self):
