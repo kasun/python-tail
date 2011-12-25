@@ -13,12 +13,6 @@ class Tail:
         ''' Initiate a Tail instance '''
         self.tail_file = file_
 
-    def print_tail(self, *args, **kargs):
-        ''' Do a tail against tracked files '''
-        #if 'f' in args:
-        #    self.print_follow(list(args).remove('f'))
-        lines = kargs.get('n', 10)
-
     def print_follow(self):
         if not self.callback:
             raise TailError('Follow option passed without registering a callback function')
