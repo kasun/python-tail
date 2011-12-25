@@ -13,7 +13,7 @@ class Tail:
         ''' Initiate a Tail instance '''
         self.tail_file = file_
 
-    def print_follow(self):
+    def follow(self):
         if not self.callback:
             raise TailError('Follow option passed without registering a callback function')
 
