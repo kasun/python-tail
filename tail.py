@@ -15,7 +15,7 @@ class Tail:
 
     def follow(self):
         if not self.callback:
-            raise TailError('Follow option passed without registering a callback function')
+            raise TailError('No callback function registered')
 
     def register_callback(self, func):
         self.callback = func
