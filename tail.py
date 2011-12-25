@@ -34,9 +34,11 @@ class Tail:
         file_.close()
 
     def register_callback(self, func):
+        ''' Register a callback function to be called when a new line is found '''
         self.callback = func
 
     def check_file_validity(self, file_):
+        ''' Check whether the a given file exists, readable and is a file '''
         if not os.access(file_, os.F_OK):
             raise TailError("File '%s' does not exist" % (file_))
         if not os.access(file_, os.R_OK):
