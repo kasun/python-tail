@@ -14,7 +14,7 @@ class Tail:
         self.check_file_validity(file_)
         self.tail_file = file_
 
-    def follow(self):
+    def follow(self, s=None):
         if not self.callback:
             raise TailError('No callback function registered')
 
