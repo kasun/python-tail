@@ -6,6 +6,7 @@ Author - Kasun Herath <kasunh01 at gmail.com>
 '''
 
 import os
+import time
 
 class Tail:
     ''' Represent a tail command '''
@@ -14,9 +15,23 @@ class Tail:
         self.check_file_validity(file_)
         self.tail_file = file_
 
-    def follow(self, s=None):
+    def follow(self, s=1):
+        ''' Do tail follow '''
         if not self.callback:
             raise TailError('No callback function registered')
+        file_ = open(self.tail_file)
+
+        # Go to the end of file
+        file_.seek(0,2)
+        while 1:
+            curr_position = file_.tell()
+            line = file_.readline()
+            if not line:
+                file_.seek(curr_position)
+            else:
+                self.callback(line)
+            time.sleep(s)
+        file_.close()
 
     def register_callback(self, func):
         self.callback = func
