@@ -9,14 +9,9 @@ import os
 
 class Tail:
     ''' Represent a tail command '''
-    def __init__(self, *args):
-        ''' Initiate a Tail instance and add files to be tracked if provided '''
-        self.files = []
-        tmp_filelist = []
-        for file_ in args:
-            self.check_file_validity(file_)
-            tmp_filelist.append(file_)
-        self.files.extend(list(set(tmp_filelist)))
+    def __init__(self, file_):
+        ''' Initiate a Tail instance '''
+        self.tail_file = file_
 
     def print_tail(self, *args, **kargs):
         ''' Do a tail against tracked files '''
