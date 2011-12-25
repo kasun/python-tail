@@ -14,6 +14,7 @@ class Tail:
         ''' Initiate a Tail instance '''
         self.check_file_validity(file_)
         self.tail_file = file_
+        self.callback = None
 
     def follow(self, s=1):
         ''' Do tail follow. If a callback function is registered it is called with every new line. 
