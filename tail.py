@@ -16,9 +16,8 @@ class Tail:
         self.tail_file = file_
 
     def follow(self, s=1):
-        ''' Do tail follow '''
-        if not self.callback:
-            raise TailError('No callback function registered')
+        ''' Do tail follow. If a callback function is registered it is called with every new line. 
+        Else printed to standard out '''
         file_ = open(self.tail_file)
 
         # Go to the end of file
@@ -29,7 +28,10 @@ class Tail:
             if not line:
                 file_.seek(curr_position)
             else:
-                self.callback(line)
+                if self.callback:
+                    self.callback(line)
+                else:
+                    print(line)
             time.sleep(s)
         file_.close()
 
