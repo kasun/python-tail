@@ -18,17 +18,11 @@ class Tail:
             tmp_filelist.append(file_)
         self.files.extend(list(set(tmp_filelist)))
 
-    def add_files(self, *args):
-        ''' Add files to be tracked '''
-        tmp_filelist = []
-        for file_ in [file_ for file_ in args if file_ not in self.files]:
-            self.check_file_validity(file_)
-            tmp_filelist.append(file_)
-        self.files.extend(list(set(tmp_filelist)))
-
     def print_tail(self, *args, **kargs):
-        if 'f' in args:
-            self.print_follow(list(args).remove('f'))
+        ''' Do a tail against tracked files '''
+        #if 'f' in args:
+        #    self.print_follow(list(args).remove('f'))
+        lines = kargs.get('n', 10)
 
     def print_follow(self):
         if not self.callback:
