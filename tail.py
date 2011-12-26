@@ -10,20 +10,20 @@ import time
 
 class Tail(object):
     ''' Represent a tail command '''
-    def __init__(self, file_):
+    def __init__(self, tailed_file):
         ''' Initiate a Tail instance '''
-        self.check_file_validity(file_)
-        self.tail_file = file_
+        self.check_file_validity(tailed_file)
+        self.tailed_file = tailed_file
         self.callback = None
 
     def follow(self, s=1):
-        ''' Do tail follow. If a callback function is registered it is called with every new line. 
-        Else printed to standard out
+        ''' Do a tail follow. If a callback function is registered it is called with every new line. 
+        Else printed to standard out.
     
         Arguments:
-            s - Number of seconds to wait between each iteration; Default to 1. '''
+            s - Number of seconds to wait between each iteration; Defaults to 1. '''
 
-        file_ = open(self.tail_file)
+        file_ = open(self.tailed_file)
 
         # Go to the end of file
         file_.seek(0,2)
