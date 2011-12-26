@@ -27,7 +27,7 @@ class Tail(object):
 
         # Go to the end of file
         file_.seek(0,2)
-        while 1:
+        while True:
             curr_position = file_.tell()
             line = file_.readline()
             if not line:
