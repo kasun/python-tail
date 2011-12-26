@@ -9,9 +9,13 @@ import os
 import time
 
 class Tail(object):
-    ''' Represent a tail command '''
+    ''' Represents a tail command. '''
     def __init__(self, tailed_file):
-        ''' Initiate a Tail instance '''
+        ''' Initiate a Tail instance.
+            
+            Arguments:
+                tailed_file - File to be followed. '''
+
         self.check_file_validity(tailed_file)
         self.tailed_file = tailed_file
         self.callback = None
