@@ -18,7 +18,11 @@ class Tail(object):
 
     def follow(self, s=1):
         ''' Do tail follow. If a callback function is registered it is called with every new line. 
-        Else printed to standard out '''
+        Else printed to standard out
+    
+        Arguments:
+            s - Number of seconds to wait between each iteration; Default to 1. '''
+
         file_ = open(self.tail_file)
 
         # Go to the end of file
