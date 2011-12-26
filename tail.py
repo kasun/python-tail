@@ -6,19 +6,21 @@ Author - Kasun Herath <kasunh01 at gmail.com>
 '''
 
 import os
+import sys
 import time
 
 class Tail(object):
     ''' Represents a tail command. '''
     def __init__(self, tailed_file):
         ''' Initiate a Tail instance.
+            Check for file validity, assigns callback function to standard out.
             
             Arguments:
                 tailed_file - File to be followed. '''
 
         self.check_file_validity(tailed_file)
         self.tailed_file = tailed_file
-        self.callback = None
+        self.callback = sys.stdout.write
 
     def follow(self, s=1):
         ''' Do a tail follow. If a callback function is registered it is called with every new line. 
@@ -36,14 +38,11 @@ class Tail(object):
                 if not line:
                     file_.seek(curr_position)
                 else:
-                    if self.callback:
-                        self.callback(line)
-                    else:
-                        print(line)
+                    self.callback(line)
                 time.sleep(s)
 
     def register_callback(self, func):
-        ''' Register a callback function to be called when a new line is found '''
+        ''' Overrides default callback function to provided function. '''
         self.callback = func
 
     def check_file_validity(self, file_):
