@@ -27,22 +27,20 @@ class Tail(object):
         Arguments:
             s - Number of seconds to wait between each iteration; Defaults to 1. '''
 
-        file_ = open(self.tailed_file)
-
-        # Go to the end of file
-        file_.seek(0,2)
-        while True:
-            curr_position = file_.tell()
-            line = file_.readline()
-            if not line:
-                file_.seek(curr_position)
-            else:
-                if self.callback:
-                    self.callback(line)
+        with open(self.tailed_file) as file_:
+            # Go to the end of file
+            file_.seek(0,2)
+            while True:
+                curr_position = file_.tell()
+                line = file_.readline()
+                if not line:
+                    file_.seek(curr_position)
                 else:
-                    print(line)
-            time.sleep(s)
-        file_.close()
+                    if self.callback:
+                        self.callback(line)
+                    else:
+                        print(line)
+                time.sleep(s)
 
     def register_callback(self, func):
         ''' Register a callback function to be called when a new line is found '''
