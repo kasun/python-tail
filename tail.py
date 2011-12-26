@@ -8,7 +8,7 @@ Author - Kasun Herath <kasunh01 at gmail.com>
 import os
 import time
 
-class Tail:
+class Tail(object):
     ''' Represent a tail command '''
     def __init__(self, file_):
         ''' Initiate a Tail instance '''
