@@ -51,11 +51,12 @@ class Tail(object):
             file_.seek(0,2)
             while True:
                 curr_position = file_.tell()
-                line = file_.readline()
-                if not line:
-                    file_.seek(curr_position)
-                else:
-                    self.callback(line)
+                file_.seek(0,2)
+                end_position = file_.tell()
+                file_.seek(curr_position)
+                if curr_position != end_position:
+                    for line in file_:
+                        self.callback(line)
                 time.sleep(s)
 
     def register_callback(self, func):
