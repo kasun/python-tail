@@ -49,7 +49,7 @@ class Tail(object):
 
         with open(self.tailed_file, self.open_mode) as file_:
             # Go to the end of file
-            file_.seek(0,0)
+            file_.seek(0,2)
             while True:
                 curr_position = file_.tell()
                 line = file_.readline()
