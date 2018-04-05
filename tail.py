@@ -28,7 +28,7 @@ import time
 
 class Tail(object):
     ''' Represents a tail command. '''
-    def __init__(self, tailed_file):
+    def __init__(self, tailed_file, open_mode = 'r'):
         ''' Initiate a Tail instance.
             Check for file validity, assigns callback function to standard out.
             
@@ -38,6 +38,7 @@ class Tail(object):
         self.check_file_validity(tailed_file)
         self.tailed_file = tailed_file
         self.callback = sys.stdout.write
+        self.open_mode = open_mode
 
     def follow(self, s=1):
         ''' Do a tail follow. If a callback function is registered it is called with every new line. 
@@ -46,9 +47,9 @@ class Tail(object):
         Arguments:
             s - Number of seconds to wait between each iteration; Defaults to 1. '''
 
-        with open(self.tailed_file) as file_:
+        with open(self.tailed_file, self.open_mode) as file_:
             # Go to the end of file
-            file_.seek(0,2)
+            file_.seek(0,0)
             while True:
                 curr_position = file_.tell()
                 line = file_.readline()
