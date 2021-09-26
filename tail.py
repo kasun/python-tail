@@ -12,7 +12,7 @@ Example:
     t = tail.Tail('file-to-be-followed')
 
     # Register a callback function to be called when a new line is found in the followed file. 
-    # If no callback function is registerd, new lines would be printed to standard out.
+    # If no callback function is registered, new lines would be printed to standard out.
     t.register_callback(callback_function)
 
     # Follow the file with 5 seconds as sleep time between iterations. 
