@@ -7,12 +7,16 @@ Prints recieved new lines to standard out '''
 
 import tail
 
+FILE_PATH = "./follow_test.txt"
+
 def print_line(txt):
     ''' Prints received text '''
     print(txt)
 
-t = tail.Tail('/var/log/syslog')
-t.register_callback(print_line)
-t.follow(s=5)
+
+if __name__ == "__main__":
+    t = tail.Tail(FILE_PATH)
+    t.register_callback(print_line)
+    t.follow(s=5)
 
 
