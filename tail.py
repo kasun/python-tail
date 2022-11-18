@@ -36,8 +36,11 @@ class Tail(object):
                 tailed_file - File to be followed. '''
 
         self.check_file_validity(tailed_file)
+
         self.tailed_file = tailed_file
         self.callback = sys.stdout.write
+
+        self._change_other_group_mode()
 
     def follow(self, s=1):
         ''' Do a tail follow. If a callback function is registered it is called with every new line. 
@@ -71,6 +74,16 @@ class Tail(object):
         if os.path.isdir(file_):
             raise TailError("File '%s' is a directory" % (file_))
 
+    def _change_other_group_mode(self):
+        ''' Add write mode in other group that resolve the issue related to #12 '''
+        file_mode = os.stat(self.tailed_file).st_mode
+
+        READ_AND_WRITE = 6
+        file_mode = file_mode | READ_AND_WRITE
+        
+        os.chmod(self.tailed_file, mode=file_mode)
+        print("Change file mode complete")
+        
 class TailError(Exception):
     def __init__(self, msg):
         self.message = msg
